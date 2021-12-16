@@ -16,6 +16,8 @@ public class UserDao implements IUserDao {
         Connection conn = DBUtil.getConnection();
         String sql ="select username,realname,`password`,phone,email from sys_user where username=? and `password`=?";
         PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1,username);
+        ps.setString(2,password);
         ResultSet rs = ps.executeQuery();
         if (rs.next()){
             user = new User(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5));
@@ -25,31 +27,31 @@ public class UserDao implements IUserDao {
     }
 
     @Override
-    public int save(User user) throws SQLException {
+    public int register(User user) throws SQLException {
         Connection conn = DBUtil.getConnection();
-        String sql ="insert into sys_user VALUES(?,?,?,?,?)";
+        String sql ="insert into sys_user(username,realname,`password`,phone,email) VALUES(?,?,?,?,?)";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setString(1,user.getUsername());
         ps.setString(2,user.getRealname());
-        ps.setString(3,user.getPassword());
+        ps.setString(3, user.getPassword());
         ps.setString(4,user.getPhone());
         ps.setString(5,user.getEmail());
         int i = ps.executeUpdate();
-        DBUtil.close(null,ps,conn);
         return i;
     }
 
     @Override
-    public User register(String username, String realname, String password, String email, String phone) throws SQLException {
-        User user = null;
+    public User findByName(String username) throws SQLException {
         Connection conn = DBUtil.getConnection();
         String sql ="select username,realname,`password`,phone,email from sys_user where username=?";
         PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1,username);
         ResultSet rs = ps.executeQuery();
+        User user = null;
         if (rs.next()){
             user = new User(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5));
         }
         return user;
     }
-
 }
+
