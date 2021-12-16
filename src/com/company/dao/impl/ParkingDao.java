@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ParkingDao implements IParkingDao {
     @Override
-    public List<Parking> findAllParking() throws SQLException {
+    public List<Parking> parkingFindAll() throws SQLException {
         Connection conn = DBUtil.getConnection();
         String sql = "SELECT b.`name`,b.address,lid,uid,end_date FROM db_parking a, db_community b WHERE a.cid=b.id;";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -25,7 +25,7 @@ public class ParkingDao implements IParkingDao {
     }
 
     @Override
-    public List<Parking> findById(int id) throws SQLException {
+    public List<Parking> parkingFindById(int id) throws SQLException {
         Connection conn = DBUtil.getConnection();
         String sql = "SELECT b.`name`,b.address,a.lid,a.uid,a.end_date FROM db_parking a, db_community b WHERE a.cid=b.id AND a.uid = ?;";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -41,7 +41,7 @@ public class ParkingDao implements IParkingDao {
     }
 
     @Override
-    public List<Parking> findByCid(int cid) throws SQLException {
+    public List<Parking> parkingFindByCid(int cid) throws SQLException {
         Connection conn = DBUtil.getConnection();
         String sql = "SELECT b.`name`,b.address,a.lid,a.uid,a.end_date FROM db_parking a, db_community b WHERE a.cid=b.id AND a.cid = ?;";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -57,7 +57,7 @@ public class ParkingDao implements IParkingDao {
     }
 
     @Override
-    public int updateParking(Parking parking) throws SQLException {
+    public int parkingUpdate(Parking parking) throws SQLException {
         Connection con = DBUtil.getConnection();
         String sql = "update db_parking set uid=?,end_date=? where lid=?;";
         PreparedStatement ps = con.prepareStatement(sql);
