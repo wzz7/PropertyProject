@@ -20,6 +20,7 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="c3p0-0.9.5.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Tomcat8" level="application_server_libraries" />
+    <orderEntry type="library" scope="PROVIDED" name="Tomcat 9.0.53" level="application_server_libraries" />
+    <orderEntry type="library" name="junit-4.12" level="project" />
   </component>
 </module>

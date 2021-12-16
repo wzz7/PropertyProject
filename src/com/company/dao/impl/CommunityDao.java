@@ -8,6 +8,7 @@ import java.util.List;
 public class CommunityDao implements ICommunityDao {
     @Override
     public List<Community> findAll() {
+
         return null;
     }
 
