@@ -10,6 +10,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDao implements IUserDao {
+
+    @Override
+    public int update(User user) throws SQLException {
+        Connection conn = DBUtil.getConnection();
+        String sql = "UPDATE sys_user set username=?,realname=?,password=?,phone=?,email=?,img=? WHERE username =?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1,user.getUsername());
+        ps.setString(2, user.getRealname());
+        ps.setString(3,user.getPassword());
+        ps.setString(4,user.getPhone());
+        ps.setString(5,user.getEmail());
+        int i = ps.executeUpdate();
+        DBUtil.close(null,ps,conn);
+        return i;
+    }
+
     @Override
     public User login(String username, String password) throws SQLException {
         User user = null;

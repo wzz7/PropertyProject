@@ -47,4 +47,15 @@ public class UserService implements IUserService {
         }
         return user;
     }
+
+    @Override
+    public int update(User user){
+        int flag = 0;
+        try {
+           flag = userDao.update(user);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return flag;
+    }
 }

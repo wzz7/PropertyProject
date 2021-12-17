@@ -8,46 +8,63 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>Layui</title>
-  <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <link rel="stylesheet" href="./js/css/layui.css" tppabs="https://www.layui.site/layui/dist/css/layui.css"  media="all">
-  <!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
-  <style>
-    .layui-input{
-      width: 300px;
-    }
-    .layui-form{
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
-    }
-  </style>
 </head>
-  <body>
-  <fieldset class="layui-elem-field layui-field-title" style="margin-top: 50px;">
-    <legend>登录</legend>
-  </fieldset>
+<body>
+<h1 style="text-align: center">Welcome</h1>
+<form class="form-horizontal" action="http://localhost:8080/login" method="post">
+    <div class="form-group">
+        <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
+        <div class="col-xs-4">
+            <input type="text" class="form-control" id="inputEmail3" name="username" placeholder="请输入用户名">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+        <div class="col-xs-4">
+            <input type="password" class="form-control" id="inputPassword3" name="password" placeholder="请输入密码">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputPassword3" class="col-sm-2 control-label">验证码</label>
+        <div class="col-xs-2">
+            <input type="text" class="form-control" name="code"> <img src="http://localhost:8080/kaptcha.jpg" id="codeImg" ><br>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"> Remember me
+                </label>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default" >Sign in</button>
+        </div>
+        <div class="col-sm-offset-2 col-sm-10">
+            <a href="http://localhost:8080/regist.jsp" >Regist</a>
+        </div>
+    </div>
+</form>
 
-  <form class="layui-form" action="http://localhost:8080/login" lay-filter="example">
-    <div class="layui-form-item">
-      <label class="layui-form-label" >输入框</label>
-      <div class="layui-input-block">
-        <input type="text" name="username" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
-      </div>
-    </div>
-    <div class="layui-form-item">
-      <label class="layui-form-label">密码框</label>
-      <div class="layui-input-block">
-        <input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input">
-      </div>
-    </div>
-    <div class="layui-form-item">
-      <div class="layui-input-block">
-        <button type="submit" class="layui-btn" lay-submit="" lay-filter="demo1">登录</button>
-        <a href="" value="注册">注册</a>
-      </div>
-    </div>
-  </form>
-  </body>
+<script>
+    $(function (){
+        $("#codeImg").click(function (){
+            /*双引号！！！！！！！！！！！！！！！！！！！！！！！！！！！！*/
+            /*每次拼一个时间 ，防止浏览器缓存*/
+            this.src = "<%request.getContextPath();%>kaptcha.jpg?"+new Date();
+        })
+    })
+</script>
+</body>
 </html>
