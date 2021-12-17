@@ -25,11 +25,11 @@ public class ParkingDao implements IParkingDao {
     }
 
     @Override
-    public List<Parking> parkingFindById(int id) throws SQLException {
+    public List<Parking> parkingFindByName(String username) throws SQLException {
         Connection conn = DBUtil.getConnection();
-        String sql = "SELECT b.`name`,b.address,a.lid,a.uid,a.end_date FROM db_parking a, db_community b WHERE a.cid=b.id AND a.uid = ?;";
+        String sql = "select c.`name`,c.address,p.lid,p.uid,p.end_date from db_parking as p inner join db_community as c on p.cid=c.id INNER JOIN sys_user as u ON p.uid=u.id where u.username=?;";
         PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1,id);
+        ps.setString(1,username);
         ResultSet rs = ps.executeQuery();
         List<Parking> parkingList = new ArrayList<>();
         while (rs.next()) {
