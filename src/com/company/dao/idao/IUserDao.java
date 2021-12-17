@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 public interface IUserDao {
     User login(String username, String password) throws SQLException;
-    User register(String username, String realname, String password, String email, String phone) throws SQLException;
-    int save(User user) throws SQLException;
+    int register(User user) throws SQLException;
+    User findByName(String username) throws SQLException;
+    int update(User user) throws SQLException;
 }
